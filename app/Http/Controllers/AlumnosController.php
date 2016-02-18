@@ -12,14 +12,18 @@ use App\Http\Requests\AlumnoRequest;
 
 class AlumnosController extends Controller
 {
+    function __construct() 
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $alumnos = Alumno::orderBy('id', 'ASC')->paginate(5);
+        $alumnos = Alumno::Buscador($request->apellidos)->orderBy('id', 'ASC')->paginate(5);
         $alumnos->each(function($alumnos)
             {
                 $alumnos->facultad;

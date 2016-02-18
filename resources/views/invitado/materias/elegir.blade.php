@@ -13,13 +13,15 @@
                 	{!! csrf_field() !!}
                 		<div class="form-group">
                 			{!! Form::label('nivel_id', 'Nivel')  !!}
-                			{!! Form::select('nivel_id', $niveles, null, ['class'=>'form-control select-nivel', 'required']) !!}
+                			{!! Form::select('nivel_id', $niveles, null, ['id'=>'nivel'],['class'=>'form-control select-nivel', 'required']) !!}
                 		</div>	
 
                 		<div class="form-group">
                 			{!! Form::label('materia_id', 'Materia')  !!}
-                			{!! Form::select('materia_id[]', $materias, null, ['class'=>'form-control select-materia', 'multiple','required']) !!}
-                		</div>
+                			<!-- {!! Form::select( null,['class'=>'form-control select-materia', 'multiple','required']) !!} -->
+                		
+                        <select class="form-control select-materia" id="materia" multiple required></select>
+                    </div>
 
                 		<div class="form-group">
                 			{!! Form::label('periodo_id', 'Periodo')  !!}
@@ -71,4 +73,5 @@
         });
 		$('.textarea-content').trumbowyg();
 	</script>
+
 @endsection

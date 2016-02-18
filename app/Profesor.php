@@ -18,4 +18,9 @@ class Profesor extends Model
     {
     	return $this->belongsToMany('App\Materias')->withTimestamps();
     }
+
+    public function scopeBuscador($query, $apellidos)
+    {
+        return $query->where('apellidos', 'LIKE', "%$apellidos%");
+    }
 }

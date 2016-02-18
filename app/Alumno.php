@@ -18,4 +18,14 @@ class Alumno extends Model
     {
     	return $this->belongsToMany('App\Materia')->withTimestamps();
     }
+
+    public function scopeBuscador($query, $apellidos)
+    {
+        return $query->where('apellidos', 'LIKE', "%$apellidos%");
+    }
+
+    // public function scopeFiltroMateria($query, $id)
+    // {
+    //     return $query->where('id', '=', "");
+    // }
 }

@@ -9,7 +9,14 @@
             <div class="panel panel-default">
                 <div class="panel-heading text-center">Lista de materia</div>
                 <div class="panel-body">
-                    <a href="{{route('admin.materias.create')}}" class="btn btn-success">Nuevo materia</a><br><br>
+                    <a href="{{route('admin.materias.create')}}" class="btn btn-success">Nuevo materia</a>
+                    {!! Form::open(['route'=>'admin.materias.index', 'method'=>'GET', 'class'=>'navbar-form pull-right']) !!}
+                        <div class="input-group">
+                            {!! Form::text('descripcion', null,['class'=>'form-control', 'placeholder'=>'Buscar materia...', 'aria-describedy'=>'search']) !!}
+                            <span class="input-group-addon" id="search"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></span>
+                        </div>
+                    {!!Form::close()!!}
+                    <hr>
                     <div class="table-responsive ">
                         <table class="table table-striped table-hover table-condensed">
                             <thead>

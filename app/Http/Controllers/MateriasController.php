@@ -15,14 +15,18 @@ use DB;
 
 class MateriasController extends Controller
 {
+    function __construct() 
+    {
+        //$this->middleware('auth', ['except' => 'elegir']);
+    }
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $materias = Materia::orderBy('id', 'ASC')->paginate(10);
+        $materias = Materia::Buscador($request->descripcion)->orderBy('id', 'ASC')->paginate(10);
         $materias->each(function($materias){
             $materias->nivel;
         }); 
@@ -102,11 +106,21 @@ class MateriasController extends Controller
      */
     public function destroy($id)
     {
+        
         $materia = Materia::find($id);
         $materia->delete();
         return redirect()->route('admin.materias.index');
     }
 
+    public function cargarMaterias(Request $request, $id)
+    {
+        if($request->ajax())
+        {
+            $materias= Materia::cargarMaterias($id);
+
+            return response()->json($materias);
+        }
+    }
     public function elegir()
     {
         // $nivel = Nivel::elegir($descripcion)->get();
@@ -129,5 +143,6 @@ class MateriasController extends Controller
         foreach ($materias as $id) {
             DB::table('alumno_materia')->insert(['alumno_id' => $alumno, 'materia_id' => $id]);
         }
+        return $this->elegir();
     } 
 }

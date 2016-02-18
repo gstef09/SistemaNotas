@@ -34,36 +34,38 @@ Route::group(['middleware' => ['web']], function () {
 
 Route::group(['middleware' => 'web'], function () {
     Route::auth();
-    Route::get('/elegir', 'MateriasController@elegir');
+   Route::get('materias/elegir', 'MateriasController@elegir');
+   Route::get('materias/cargarMaterias/{id}', 'MateriasController@cargarMaterias');
     Route::post('guardarseleccion', 'MateriasController@guardarSeleccion');
+    Route::get('notas/consultar', 'NotasController@consultar');
     Route::group(['prefix' => 'admin'], function(){
-	Route::resource('usuarios', 'UsuariosController');
-	Route::get('usuarios/{id}/destroy',
-		[
-			'uses' => 'UsuariosController@destroy',
-			'as' => 'admin.usuarios.destroy'
-		]);
+    	Route::resource('notas', 'NotasController');
+		Route::resource('usuarios', 'UsuariosController');
+		Route::get('usuarios/{id}/destroy',
+			[
+				'uses' => 'UsuariosController@destroy',
+				'as' => 'admin.usuarios.destroy'
+			]);
+		Route::resource('alumnos', 'AlumnosController');
+		Route::get('alumnos/{id}/destroy',
+			[
+			'uses' => 'AlumnosController@destroy',
+			'as' => 'admin.alumnos.destroy'
+			]);
 
-	Route::resource('alumnos', 'AlumnosController');
-	Route::get('alumnos/{id}/destroy',
-		[
-		'uses' => 'AlumnosController@destroy',
-		'as' => 'admin.alumnos.destroy'
-		]);
+		Route::resource('profesores', 'ProfesoresController');
+		Route::get('profesores/{id}/destroy',
+			[
+			'uses' => 'ProfesoresController@destroy',
+			'as' => 'admin.profesores.destroy'
+			]);
 
-	Route::resource('profesores', 'ProfesoresController');
-	Route::get('profesores/{id}/destroy',
-		[
-		'uses' => 'ProfesoresController@destroy',
-		'as' => 'admin.profesores.destroy'
-		]);
-
-	Route::resource('materias', 'MateriasController');
-	Route::get('materias/{id}/destroy',
-		[
-		'uses' => 'MateriasController@destroy',
-		'as' => 'admin.materias.destroy'
-		]);
+		Route::resource('materias', 'MateriasController');
+		Route::get('materias/{id}/destroy',
+			[
+			'uses' => 'MateriasController@destroy',
+			'as' => 'admin.materias.destroy'
+			]);
 });
 
     Route::get('/home', 'HomeController@index');

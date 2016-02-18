@@ -9,7 +9,14 @@
             <div class="panel panel-default">
                 <div class="panel-heading text-center">Lista de Profesores</div>
                 <div class="panel-body">
-                    <a href="{{route('admin.profesores.create')}}" class="btn btn-success">Nuevo Profesor</a><br><br>
+                    <a href="{{route('admin.profesores.create')}}" class="btn btn-success">Nuevo Profesor</a>
+                    {!! Form::open(['route'=>'admin.alumnos.index', 'method'=>'GET', 'class'=>'navbar-form pull-right']) !!}
+                    <div class="input-group">
+                        {!! Form::text('apellidos', null,['class'=>'form-control', 'placeholder'=>'Buscar profesor...', 'aria-describedy'=>'search']) !!}
+                        <span class="input-group-addon" id="search"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></span>
+                    </div>
+                {!!Form::close()!!}
+                <hr>
                     <div class="table-responsive ">
                         <table class="table table-striped table-hover table-condensed">
                             <thead>

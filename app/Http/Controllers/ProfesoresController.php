@@ -11,14 +11,18 @@ use App\Http\Requests\ProfesorRequest;
 
 class ProfesoresController extends Controller
 {
+    function __construct() 
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $profesores = Profesor::orderBy('id', 'ASC')->paginate(5);
+        $profesores = Profesor::Buscador($request->apellidos)->orderBy('id', 'ASC')->paginate(5);
         $profesores->each(function($profesores)
             {
                 $profesores->facultad;

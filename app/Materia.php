@@ -28,4 +28,13 @@ class Materia extends Model
     {
         return $this->belongsToMany('App\Profesor')->withTimestamps();
     }
+
+    public function scopeBuscador($query, $descripcion)
+    {
+        return $query->where('descripcion', 'LIKE', "%$descripcion%");
+    }
+
+    public static function cargarMaterias($id){
+        return Materia::where('nivel_id','=',$id)->get();
+    }
 }

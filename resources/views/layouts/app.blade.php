@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
+   
     <title>@yield('title', 'Inicio') | Sistema Notas</title>
 
     <!-- Fonts -->
@@ -56,11 +56,11 @@
                       <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Notas<span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                          <li><a href="#"><i class="fa fa-plus"></i>  Ingresar Notas</a></li>
-                          <li><a href="#"><i class="fa fa-archive"></i>  Consultar Notas</a></li>
+                          <li><a href="{{route('admin.notas.index')}}"><i class="fa fa-plus"></i>  Ingresar Notas</a></li>
+                          <li><a href="{{url('notas/consultar')}}"><i class="fa fa-archive"></i>  Consultar Notas</a></li>
                         </ul>
                       </li>
-                      <li><a href="{{url('/elegir')}}">Elegir Materias</a></li>
+                      <li><a href="{{url('materias/elegir')}}">Elegir Materias</a></li>
                       <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                 {{ Auth::user()->name }} <span class="caret"></span>
@@ -70,8 +70,8 @@
                             </ul>
                         </li>
                       @else
-                      <li><a href="#">Elegir Materias</a></li>
-                      <li><a href="#">Consultas</a></li>
+                      <li><a href="{{url('materias/elegir')}}">Elegir Materias</a></li>
+                      <li><a href="{{url('notas/consultar')}}">Consultas</a></li>
                       <li><a href="{{ url('/login') }}">Iniciar  Sesión</a></li>
                     @endif
                 </ul>
@@ -80,6 +80,9 @@
     </nav>   
         @include('flash::message')       
         @yield('content')
+        {!!Html::script('js/jquery.js')!!}
+         {!!Html::script('js/consultas.js')!!}
+         {!!Html::script('js/ajax-chosen.js')!!}
     <footer>
         <nav class="navbar navbar-default">
             <div class="container-fluid">
@@ -92,11 +95,12 @@
     </footer>
 
     <!-- JavaScripts -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>-->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     {{-- <script src="{{ elixir('js/app.js') }}"></script> --}}
     <script src="{{ asset('plugin/chosen/chosen.jquery.js') }}"></script>
     <script src="{{ asset('plugin/trumbowyg/trumbowyg.js') }}"></script>
+     
 
     @yield('js')
 </body>

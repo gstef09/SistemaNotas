@@ -12,14 +12,18 @@ use App\Http\Requests\UsuariosRequest;
 
 class UsuariosController extends Controller
 {
+    function __construct() 
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $usuarios = User::orderBy('id', 'ASC')->paginate(5);
+        $usuarios = User::Buscador($request->name)->orderBy('id', 'ASC')->paginate(5);
         return view('admin.usuarios.index')->with('usuarios', $usuarios);
     }
 
